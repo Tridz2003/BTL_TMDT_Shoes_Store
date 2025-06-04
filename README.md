@@ -1,7 +1,7 @@
 # MERN-Ecommerce
-Ecommerce website has full CRUD operations of products, categories, orders, users ...etc , authentication &amp; authorization , img uploading, stripe or cash payment and much more.
+Website thương mại điện tử có đầy đủ các thao tác CRUD cho sản phẩm, danh mục, đơn hàng, người dùng ...v.v, xác thực & phân quyền, tải ảnh lên, thanh toán bằng Stripe hoặc tiền mặt và nhiều tính năng khác.
 
-## Tech
+## Công nghệ sử dụng
 - React 
 - ReduxToolkit
 - Reactstrap, Styled Components
@@ -11,24 +11,21 @@ Ecommerce website has full CRUD operations of products, categories, orders, user
 - Mongoose
 - JsonWebToken
 - Express Validator
-and much more ...
+và còn nữa ...
 
-## Featuers
-- Good folders structure
-- Reusable components
-- State management by ReduxToolkit
-- Form Validation by Formik,Yup
-- Admin Dashboard to handle all resources .. products, orders, users ...etc
-- Server validation by express-validator
-- Image uploading by Multer,Sharp
-- Payment by stripe or can pay cash on delivery
-- JWT Authentication, Authorization
-
-## API Reference
-[API reference](https://documenter.getpostman.com/view/22360984/2s93Jut2tg)
+## Tính năng
+- Cấu trúc thư mục hợp lý
+- Các component có thể tái sử dụng
+- Quản lý trạng thái bằng ReduxToolkit
+- Xác thực form bằng Formik, Yup
+- Bảng điều khiển quản trị để quản lý tất cả tài nguyên: sản phẩm, đơn hàng, người dùng ...v.v
+- Xác thực phía server bằng express-validator
+- Tải ảnh lên bằng Multer, Sharp
+- Thanh toán bằng Stripe hoặc tiền mặt khi nhận hàng
+- Xác thực và phân quyền bằng JWT
 
 ## ENV
-To run this project, you will need to add the following environment variables to your .env file
+Để chạy dự án này, bạn cần thêm các biến môi trường sau vào file .env của mình
 
 `PORT`
 `NODE_ENV`
@@ -43,6 +40,3 @@ To run this project, you will need to add the following environment variables to
 `JWT_COOKIE_EXPIRE_IN`
 `STRIPE_SECRET_KEY`
 `STRIPE_WEBHOOK_SECRET`
-
-## Demo
-You can see app from [HERE](https://youtu.be/psp6Ojz_BDE)
