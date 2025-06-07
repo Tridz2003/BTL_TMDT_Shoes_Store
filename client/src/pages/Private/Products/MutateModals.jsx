@@ -138,11 +138,11 @@ export const CreateProductModal = ({
             {/* Name */}
             <Col lg={4} md={6} xs={6}>
               <div className="Input-Item">
-                <Label>Name</Label>
+                <Label>Tên sản phẩm</Label>
                 <FormInput
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Tên sản phẩm"
                   handleChange={handleChangeName}
                 />
               </div>
@@ -150,7 +150,7 @@ export const CreateProductModal = ({
             {/* Category */}
             <Col lg={2} md={3} xs={6}>
               <div className="Input-Item">
-                <Label>Category</Label>
+                <Label>Danh Mục sản phẩm</Label>
                 <Input
                   id="category"
                   name="select"
@@ -160,7 +160,7 @@ export const CreateProductModal = ({
                   defaultValue=""
                 >
                   <option value="" disabled hidden>
-                    Select Category
+                    Chọn danh mục
                   </option>
                   {allCategories.categories?.map((item) => (
                     <option key={item._id} value={item._id}>
@@ -174,11 +174,11 @@ export const CreateProductModal = ({
             {/* Quantity In Stock */}
             <Col lg={2} md={3} xs={4}>
               <div className="Input-Item">
-                <Label>Quantity</Label>
+                <Label>Số lượng</Label>
                 <FormInput
                   type="number"
                   name="quantityInStock"
-                  placeholder="Quantity In Stock"
+                  placeholder="Nhập số lượng sản phẩm"
                   handleChange={handleChangeQuantityInStock}
                 />
               </div>
@@ -187,11 +187,11 @@ export const CreateProductModal = ({
             {/* Price */}
             <Col lg={2} md={3} xs={4}>
               <div className="Input-Item">
-                <Label>Price</Label>
+                <Label>Giá bán</Label>
                 <FormInput
                   type="number"
                   name="price"
-                  placeholder="Price"
+                  placeholder="Nhập giá bán"
                   handleChange={handleChangePrice}
                 />
               </div>
@@ -199,11 +199,11 @@ export const CreateProductModal = ({
             {/* Discount */}
             <Col lg={2} md={3} xs={4}>
               <div className="Input-Item">
-                <Label>Discount</Label>
+                <Label>Giảm giá</Label>
                 <FormInput
                   type="number"
                   name="discount"
-                  placeholder="Discount"
+                  placeholder="Giảm giá"
                   handleChange={handleChangeDiscount}
                 />
               </div>
@@ -214,11 +214,11 @@ export const CreateProductModal = ({
           <Row>
             <Col>
               <div className="Input-Item">
-                <Label>Description</Label>
+                <Label>Mô tả sản phẩm</Label>
                 <Input
                   type="textarea"
                   name="description"
-                  placeholder="Description"
+                  placeholder="Nhập mô tả"
                   rows="4"
                   cols="50"
                   onChange={handleChangeDescription}
@@ -247,13 +247,13 @@ export const CreateProductModal = ({
               onItemDeleted={handleSize}
               className="multiple-select-text-input rounded"
               name="sizes-input"
-              placeholder="Enter whatever Sizes you want separate them with COMMA or ENTER."
+              placeholder="Nhập Size và nhấn Enter để lưu loại size!"
             />
           </div>
 
           {/* Colors */}
           <div className="Input-Item">
-            <Label>Colors</Label>
+            <Label>Màu</Label>
             <div className="d-flex flex-wrap gap-3">
               {colors.length > 0 ? (
                 colors.map((color, idx) => (
@@ -453,10 +453,10 @@ export const CreateProductModal = ({
             toggle();
           }}
         >
-          Create
+          Thêm
         </Button>
         <Button color="primary" onClick={toggle}>
-          Cancel
+          Huỷ
         </Button>
       </ModalFooter>
     </Modal>
@@ -616,7 +616,7 @@ export const UpdateProductModal = ({
             {/* Category */}
             <Col lg={2} md={3} xs={6}>
               <div className="Input-Item">
-                <Label>Category</Label>
+                <Label>Danh mục</Label>
                 <Input
                   id="category"
                   name="select"
