@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Form,
@@ -21,27 +21,23 @@ import SideBarLayout from "../../../layout/SideBarLayout";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const {userProfile, isMutation} = useSelector((state) => state.user);
-  //MODALS
+  const { userProfile, isMutation } = useSelector((state) => state.user);
+
+  // MODALS
   const [profileModal, setProfileModal] = useState(false);
   const toggleProfileModal = () => setProfileModal(!profileModal);
   const [passModal, setPassModal] = useState(false);
   const togglePassModal = () => setPassModal(!passModal);
 
-  //INPUTS_STATE
-  //1)INFO[username-email-image]
+  // INPUT STATE
   const [username, setUsername] = useState(userProfile?.user?.username);
   const [email, setEmail] = useState(userProfile?.user?.email);
   const [image, setImage] = useState(null);
-  const handleChangeUsername = (e) => {
-    setUsername(e.target.value);
-  };
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleChangeImage = (e) => {
-    setImage(e.target.files[0]);
-  };
+
+  const handleChangeUsername = (e) => setUsername(e.target.value);
+  const handleChangeEmail = (e) => setEmail(e.target.value);
+  const handleChangeImage = (e) => setImage(e.target.files[0]);
+
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -53,15 +49,16 @@ const Profile = () => {
     dispatch(updateUserProfile(formData));
   };
 
-  //2)PASSWORD[currentPassword-newPassword-confirmNewPassword]
   const [values, setValues] = useState({
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
   });
+
   const handleChangePasses = (e) => {
-    setValues({...values, [e.target.name]: e.target.value});
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
+
   const handleUpdatePassword = (e) => {
     e.preventDefault();
     dispatch(updateUserPassword(values));
@@ -69,12 +66,12 @@ const Profile = () => {
 
   return (
     <>
-      <PageHelmet title={"Profile"} />
+      <PageHelmet title={"Hồ sơ cá nhân"} />
       <SideBarLayout>
         <section className="wishlist-section">
-          <h4 className="mb-4">Profile</h4>
+          <h4 className="mb-4">Hồ sơ cá nhân</h4>
 
-          {/* Profile Card */}
+          {/* Thẻ thông tin người dùng */}
           <div
             className="d-flex flex-column align-items-center gap-3 text-center mx-auto"
             style={{
@@ -85,39 +82,40 @@ const Profile = () => {
               borderRadius: "20px",
             }}
           >
-            {/* box-shadow: ; box-shadow: ;*/}
             <img
               src={userProfile?.user?.image}
-              alt="user-img"
+              alt="Ảnh người dùng"
               width={100}
               height={100}
               className="rounded-circle"
             />
             <ul className="d-flex flex-column gap-2">
               <li>
-                <span className="fw-bold">Username :</span>{" "}
+                <span className="fw-bold">Tên đăng nhập:</span>{" "}
                 <span>{userProfile?.user?.username.toUpperCase()}</span>
               </li>
               <li>
-                <span className="fw-bold">Email :</span>{" "}
+                <span className="fw-bold">Email:</span>{" "}
                 <span>{userProfile?.user?.email}</span>
               </li>
             </ul>
           </div>
 
-          {/* Modals Buttons */}
+          {/* Nút mở modal */}
           <div className="d-flex justify-content-center gap-3 mt-3">
             <Button color="info" onClick={toggleProfileModal}>
-              Edit Profile
+              Chỉnh sửa hồ sơ
             </Button>
             <Button color="dark" onClick={togglePassModal}>
-              Update Password
+              Đổi mật khẩu
             </Button>
           </div>
 
-          {/* Profile-Modal */}
+          {/* Modal cập nhật hồ sơ */}
           <Modal isOpen={profileModal} toggle={toggleProfileModal} centered>
-            <ModalHeader toggle={toggleProfileModal}>Edit Profile</ModalHeader>
+            <ModalHeader toggle={toggleProfileModal}>
+              Chỉnh sửa hồ sơ
+            </ModalHeader>
             <ModalBody>
               <Form>
                 <FormInput
@@ -125,12 +123,14 @@ const Profile = () => {
                   name="username"
                   onChange={handleChangeUsername}
                   value={username}
+                  placeholder="Tên đăng nhập"
                 />
                 <FormInput
                   type="email"
                   name="email"
                   onChange={handleChangeEmail}
                   value={email}
+                  placeholder="Email"
                 />
                 <Input
                   name="image"
@@ -155,37 +155,37 @@ const Profile = () => {
                     }
                   }}
                 >
-                  Edit
+                  Lưu thay đổi
                 </Button>
               )}
-              <Button color="primary" onClick={toggleProfileModal}>
-                Cancel
+              <Button color="secondary" onClick={toggleProfileModal}>
+                Hủy
               </Button>
             </ModalFooter>
           </Modal>
 
-          {/* Password-Modal */}
+          {/* Modal đổi mật khẩu */}
           <Modal isOpen={passModal} toggle={togglePassModal} centered>
-            <ModalHeader toggle={togglePassModal}>Update Password</ModalHeader>
+            <ModalHeader toggle={togglePassModal}>Đổi mật khẩu</ModalHeader>
             <ModalBody>
               <Form>
                 <FormInput
                   type="password"
                   name="currentPassword"
                   onChange={handleChangePasses}
-                  placeholder="Current Password"
+                  placeholder="Mật khẩu hiện tại"
                 />
                 <FormInput
                   type="password"
                   name="newPassword"
                   onChange={handleChangePasses}
-                  placeholder="New Password"
+                  placeholder="Mật khẩu mới"
                 />
                 <FormInput
                   type="password"
                   name="confirmNewPassword"
                   onChange={handleChangePasses}
-                  placeholder="Confirm New Password"
+                  placeholder="Xác nhận mật khẩu mới"
                 />
               </Form>
             </ModalBody>
@@ -204,11 +204,11 @@ const Profile = () => {
                     }
                   }}
                 >
-                  Update
+                  Cập nhật
                 </Button>
               )}
-              <Button color="primary" onClick={toggleProfileModal}>
-                Cancel
+              <Button color="secondary" onClick={togglePassModal}>
+                Hủy
               </Button>
             </ModalFooter>
           </Modal>

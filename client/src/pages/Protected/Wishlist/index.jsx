@@ -1,5 +1,5 @@
 import React from "react";
-import {Alert, Col, Row} from "reactstrap";
+import { Alert, Col, Row } from "reactstrap";
 import ProductCard from "../../../common/components/Cards/ProductCard";
 import BlockLoader from "../../../common/components/Loaders/BlockLoader";
 import PageHelmet from "../../../common/components/Shared/PageHelmet";
@@ -7,13 +7,13 @@ import useWishlist from "../../../common/hooks/wishlist/useWishlist";
 import SideBarLayout from "../../../layout/SideBarLayout";
 
 const Wishlist = () => {
-  const {userWishList} = useWishlist();
+  const { userWishList } = useWishlist();
   return (
     <>
-      <PageHelmet title={"Wishlist"} />
+      <PageHelmet title={"Yêu thích"} />
       <SideBarLayout>
         <section className="wishlist-section">
-          <h4 className="mb-4">Wishlist</h4>
+          <h4 className="mb-4">Danh sách yêu thích</h4>
           {userWishList.loading ? (
             <BlockLoader minHeight={200} />
           ) : userWishList.wishlist.length > 0 ? (
@@ -25,7 +25,7 @@ const Wishlist = () => {
               ))}
             </Row>
           ) : (
-            <Alert color="info">Your wishlist is empty !</Alert>
+            <Alert color="info">Danh sách yêu thích của bạn đang trống!</Alert>
           )}
         </section>
       </SideBarLayout>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -11,11 +11,11 @@ import {
   Spinner,
 } from "reactstrap";
 import PageHelmet from "../../../common/components/Shared/PageHelmet";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import pushNotification from "../../../common/components/Shared/Notification";
 import PageBreadcrumbs from "../../../common/components/Shared/PageBreadcrumbs";
-import {createShippingAddress} from "../../../features/address/addressSlice";
+import { createShippingAddress } from "../../../features/address/addressSlice";
 import useUserCart from "../../../common/hooks/cart/useUserCart";
 import paymentMethods from "../../../assets/imgs/payment-method.png";
 import {
@@ -31,11 +31,8 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //USER_CART
-  const {userCart} = useUserCart();
-  // console.log(userCart.cart?.cartItems.length);
+  const { userCart } = useUserCart();
 
-  //ADDRESS
   const [address, setAddress] = useState(
     localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))
@@ -46,23 +43,19 @@ const Checkout = () => {
           postalCode: "",
         }
   );
+
   const handleChange = (e) => {
-    setAddress({...address, [e.target.name]: e.target.value});
+    setAddress({ ...address, [e.target.name]: e.target.value });
   };
 
-  //PAYMENT
   const [paymentMethod, setPaymentMethod] = useState(null);
   const handlePaymentMethod = (paymentVal) => {
     setPaymentMethod(paymentVal);
   };
-  // console.log(paymentMethod);
 
-  //ORDER
-  const {isMutation, sessionUrl} = useSelector((state) => state.orders);
+  const { isMutation, sessionUrl } = useSelector((state) => state.orders);
 
-  //HANDLE_CREATE_ORDER
   const handleSubmitOrder = (e) => {
-    //Handle-Shipping-Address
     e.preventDefault();
     if (
       !address.detailedAddress ||
@@ -70,22 +63,22 @@ const Checkout = () => {
       !address.phone ||
       !address.postalCode
     ) {
-      pushNotification("Please fill all shipping address field", "error");
+      pushNotification("Vui lòng điền đầy đủ thông tin địa chỉ giao hàng", "error");
       return;
     }
     localStorage.setItem("shippingAddress", JSON.stringify(address));
     dispatch(createShippingAddress(address));
-    //Handle-User-Cart
+
     if (userCart.cart?.cartItems.length < 1) {
-      pushNotification("Your cart is empty", "error");
+      pushNotification("Giỏ hàng của bạn đang trống", "error");
       setTimeout(() => {
         navigate("/cart");
       }, 1000);
       return;
     }
-    //Handle-Payment
+
     if (!paymentMethod) {
-      pushNotification("Please select a payment method", "error");
+      pushNotification("Vui lòng chọn phương thức thanh toán", "error");
       return;
     }
 
@@ -93,7 +86,7 @@ const Checkout = () => {
       dispatch(
         createCashOrder({
           cartId: userCart.cart?._id,
-          body: {shippingAddress: address},
+          body: { shippingAddress: address },
         })
       );
     } else if (paymentMethod === "card") {
@@ -111,12 +104,10 @@ const Checkout = () => {
       if (isMutation.success) {
         if (sessionUrl) {
           dispatch(resetMutationResult());
-          //FOR-CARD
           window.location.href = sessionUrl;
           dispatch(resetSessionUrl());
         } else {
           dispatch(resetMutationResult());
-          //FOR-CASH
           setTimeout(() => (window.location.href = "/orders"), 1000);
         }
       }
@@ -125,58 +116,58 @@ const Checkout = () => {
 
   return (
     <>
-      <PageHelmet title={"Checkout"} />
+      <PageHelmet title={"Thanh toán"} />
       <Container className="py-4">
         <PageBreadcrumbs
           pages={[
-            {page: "Home", link: "/"},
-            {page: "Cart", link: "/cart"},
-            {page: "Checkout", isActive: true},
+            { page: "Trang chủ", link: "/" },
+            { page: "Giỏ hàng", link: "/cart" },
+            { page: "Thanh toán", isActive: true },
           ]}
         />
         <Row>
           <Col md={7}>
-            <h3 className="mb-3">Shipping Address</h3>
+            <h3 className="mb-3">Địa chỉ giao hàng</h3>
             <Form>
               <FormGroup>
-                <Label for="address">Address In Details</Label>
+                <Label for="address">Địa chỉ chi tiết</Label>
                 <Input
                   id="address"
                   name="detailedAddress"
-                  placeholder="Address In Details"
+                  placeholder="Nhập địa chỉ chi tiết"
                   type="text"
                   value={address.detailedAddress}
                   onChange={handleChange}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="city">City</Label>
+                <Label for="city">Thành phố</Label>
                 <Input
                   id="city"
                   name="city"
-                  placeholder="City"
+                  placeholder="Nhập thành phố"
                   type="text"
                   value={address.city}
                   onChange={handleChange}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="phone">Phone Number</Label>
+                <Label for="phone">Số điện thoại</Label>
                 <Input
                   id="phone"
                   name="phone"
-                  placeholder="Phone Number"
+                  placeholder="Nhập số điện thoại"
                   type="text"
                   value={address.phone}
                   onChange={handleChange}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="postalCode">Postal Code</Label>
+                <Label for="postalCode">Mã bưu điện</Label>
                 <Input
                   id="postalCode"
                   name="postalCode"
-                  placeholder="Postal Code"
+                  placeholder="Nhập mã bưu điện"
                   type="text"
                   value={address.postalCode}
                   onChange={handleChange}
@@ -185,10 +176,10 @@ const Checkout = () => {
             </Form>
           </Col>
           <Col md={4}>
-            <h3 className="mb-3">Payment Method</h3>
+            <h3 className="mb-3">Phương thức thanh toán</h3>
             <div className="bg-light p-3">
-              <div className="d-flex flex-column gap-2 ">
-                <h5>Price</h5>
+              <div className="d-flex flex-column gap-2">
+                <h5>Giá trị đơn hàng</h5>
                 <span
                   style={{
                     fontFamily: "sans-serif",
@@ -200,58 +191,46 @@ const Checkout = () => {
                       : "black",
                   }}
                 >
-                  Cart Subtotal : ${userCart.cart?.totalPrice}
+                  Tạm tính: ${userCart.cart?.totalPrice}
                 </span>
                 {userCart.cart?.totalPriceAfterCouponDiscount > 0 && (
                   <span>
-                    {" "}
-                    Cart Subtotal After Discount : $
-                    {userCart.cart?.totalPriceAfterCouponDiscount}
+                    Sau giảm giá: ${userCart.cart?.totalPriceAfterCouponDiscount}
                   </span>
                 )}
               </div>
               <hr />
               <div className="d-flex flex-column gap-2">
-                <h5>Payment</h5>
+                <h5>Thanh toán</h5>
                 <Form
                   className="d-flex flex-column gap-2"
                   onSubmit={handleSubmitOrder}
                 >
                   <div>
                     <Input
-                      onChange={(e) => {
-                        handlePaymentMethod(e.target.value);
-                      }}
+                      onChange={(e) => handlePaymentMethod(e.target.value)}
                       type="radio"
                       id={"cash"}
                       value={"cash"}
                       name="payment"
                     />{" "}
-                    <Label>Cash on delivery</Label>
+                    <Label>Thanh toán khi nhận hàng</Label>
                   </div>
                   <div>
                     <Input
-                      onChange={(e) => {
-                        handlePaymentMethod(e.target.value);
-                      }}
+                      onChange={(e) => handlePaymentMethod(e.target.value)}
                       type="radio"
                       id={"card"}
                       value={"card"}
                       name="payment"
                     />{" "}
-                    <Label>Credit Card</Label>
+                    <Label>Thanh toán bằng thẻ</Label>
                   </div>
                   <div>
-                    <img src={paymentMethods} alt="payments-img" />
+                    <img src={paymentMethods} alt="Hình thức thanh toán" />
                   </div>
                   {isMutation.loading ? (
-                    <Button
-                      size="sm"
-                      block
-                      color="primary"
-                      disabled
-                      className="mt-3"
-                    >
+                    <Button size="sm" block color="primary" disabled className="mt-3">
                       <Spinner size={"sm"} />
                     </Button>
                   ) : (
@@ -262,7 +241,7 @@ const Checkout = () => {
                       type="submit"
                       className="mt-3"
                     >
-                      Place Order
+                      Đặt hàng
                     </Button>
                   )}
                 </Form>

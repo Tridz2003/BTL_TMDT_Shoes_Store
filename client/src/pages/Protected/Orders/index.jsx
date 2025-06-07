@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {Alert, Badge, Table} from "reactstrap";
+import { Link } from "react-router-dom";
+import { Alert, Badge, Table } from "reactstrap";
 import BlockLoader from "../../../common/components/Loaders/BlockLoader";
 import OverlayLoader from "../../../common/components/Loaders/OverlayLoader";
 import PageHelmet from "../../../common/components/Shared/PageHelmet";
@@ -8,27 +8,27 @@ import useGetOrders from "../../../common/hooks/orders/useGetOrders";
 import SideBarLayout from "../../../layout/SideBarLayout";
 
 const Orders = () => {
-  const {allOrders, isMutation} = useGetOrders();
+  const { allOrders, isMutation } = useGetOrders();
 
   return (
     <>
-      <PageHelmet title={"Orders"} />
+      <PageHelmet title={"Đơn hàng"} />
       <OverlayLoader active={isMutation?.loading} />
       <SideBarLayout>
         <section className="wishlist-section">
-          <h4 className="mb-4">Orders</h4>
+          <h4 className="mb-4">Danh sách đơn hàng</h4>
           {allOrders.loading ? (
             <BlockLoader minHeight={200} />
           ) : allOrders.orders?.length > 0 ? (
             <Table responsive striped>
               <thead>
                 <tr className="text-center">
-                  <th>Id</th>
-                  <th>Created At</th>
-                  <th>Price</th>
-                  <th>Payment Method</th>
-                  <th>Paid</th>
-                  <th>Delivered</th>
+                  <th>Mã đơn</th>
+                  <th>Ngày tạo</th>
+                  <th>Tổng tiền</th>
+                  <th>Thanh toán</th>
+                  <th>Đã thanh toán</th>
+                  <th>Đã giao hàng</th>
                 </tr>
               </thead>
               <tbody>
@@ -38,7 +38,7 @@ const Orders = () => {
                       <Link to={`/orders/${item._id}`}>{item._id}</Link>
                     </th>
                     <td>
-                      {new Date(item.createdAt).toLocaleString("en-GB", {
+                      {new Date(item.createdAt).toLocaleString("vi-VN", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
@@ -48,34 +48,34 @@ const Orders = () => {
                     <td>
                       {item.paymentMethod === "cash" && (
                         <Badge color="primary" className="rounded">
-                          cash
+                          Tiền mặt
                         </Badge>
                       )}
                       {item.paymentMethod === "card" && (
                         <Badge color="info" className="rounded">
-                          card
+                          Thẻ
                         </Badge>
                       )}
                     </td>
                     <td>
                       {item.isPaid ? (
                         <Badge color="success" className="rounded">
-                          Yes
+                          Đã thanh toán
                         </Badge>
                       ) : (
                         <Badge color="danger" className="rounded">
-                          No
+                          Chưa thanh toán
                         </Badge>
                       )}
                     </td>
                     <td>
                       {item.isDelivered ? (
                         <Badge color="success" className="rounded">
-                          Yes
+                          Đã giao
                         </Badge>
                       ) : (
                         <Badge color="danger" className="rounded">
-                          No
+                          Chưa giao
                         </Badge>
                       )}
                     </td>
@@ -84,7 +84,7 @@ const Orders = () => {
               </tbody>
             </Table>
           ) : (
-            <Alert>Your orders list is empty</Alert>
+            <Alert color="info">Bạn chưa có đơn hàng nào.</Alert>
           )}
         </section>
       </SideBarLayout>
