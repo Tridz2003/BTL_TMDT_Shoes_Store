@@ -1,33 +1,28 @@
-import React, {useState} from "react";
-import {Alert} from "reactstrap";
+import React, { useState } from "react";
+import { Alert } from "reactstrap";
 import OverlayLoader from "../../../common/components/Loaders/OverlayLoader";
 import PageHelmet from "../../../common/components/Shared/PageHelmet";
 import DashboardLayout from "../../../layout/DashboardLayout";
-import {MdDelete, MdEdit} from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import useGetCoupons from "../../../common/hooks/coupons/useGetCoupons";
 import useMutateCoupons from "../../../common/hooks/coupons/useMutateCoupons";
 import DashboardHead from "../../../common/components/Heads/DashboardHead";
 import PaginateTable from "../../../common/components/Shared/PaginateTable";
-import {CreateCouponModal, UpdateCouponModal} from "./MutateModals";
+import { CreateCouponModal, UpdateCouponModal } from "./MutateModals";
 
 const Coupons = () => {
-  /*____ALL_COUPONS____*/
-  //_PAGINATION
   const [page, setPage] = useState(1);
   const handlePagination = (pg) => {
     setPage(pg);
   };
-  const {allCoupons, isMutation} = useGetCoupons(5, page);
+  const { allCoupons, isMutation } = useGetCoupons(5, page);
 
-  /*____UPDATE_MODAL____*/
   const [updateModal, setUpdateModal] = useState(false);
   const toggleUpdateModal = () => setUpdateModal(!updateModal);
 
-  /*____CREATE_MODAL____*/
   const [createModal, setCreateModal] = useState(false);
   const toggleCreateModal = () => setCreateModal(!createModal);
 
-  /*____MUTATION_HANDLERS___*/
   const {
     handleChangeValues,
     handleCreateCoupon,
@@ -40,7 +35,7 @@ const Coupons = () => {
 
   return (
     <>
-      <PageHelmet title={"Coupons"} />
+      <PageHelmet title={"Mã giảm giá"} />
       <DashboardLayout>
         <section className="Coupons-section position-relative">
           {/*____LOADING_OVERLAY____*/}
@@ -48,7 +43,7 @@ const Coupons = () => {
 
           {/*____HEAD____*/}
           <DashboardHead
-            head={"Coupons"}
+            head={"Danh sách mã giảm giá"}
             toggleCreateModal={toggleCreateModal}
             loading={allCoupons.loading}
           />
@@ -57,7 +52,7 @@ const Coupons = () => {
           <CreateCouponModal
             modalState={createModal}
             toggle={toggleCreateModal}
-            ModalHead={"Create Coupon"}
+            ModalHead={"Tạo mã giảm giá"}
             handleCreateCoupon={handleCreateCoupon}
             handleChangeValues={handleChangeValues}
           />
@@ -68,7 +63,7 @@ const Coupons = () => {
               <UpdateCouponModal
                 modalState={updateModal}
                 toggle={toggleUpdateModal}
-                ModalHead={"Update Coupon"}
+                ModalHead={"Cập nhật mã giảm giá"}
                 handleUpdateCoupon={handleUpdateCoupon}
                 getDateToInput={getDateToInput}
                 coupon={coupon}
@@ -82,23 +77,23 @@ const Coupons = () => {
               >
                 <thead>
                   <tr>
-                    <th>Coupon Code</th>
-                    <th>Expire At</th>
-                    <th>ProductID</th>
-                    <th>% Discount</th>
-                    <th>Update</th>
-                    <th>Delete</th>
+                    <th>Mã giảm giá</th>
+                    <th>Ngày hết hạn</th>
+                    <th>ID sản phẩm</th>
+                    <th>Giảm giá (%)</th>
+                    <th>Cập nhật</th>
+                    <th>Xóa</th>
                   </tr>
                 </thead>
                 <tbody>
                   {allCoupons.coupons.map((item) => (
                     <tr key={item._id}>
-                      <td style={{fontSize: "12px"}}>{item.name}</td>
-                      <td style={{fontSize: "12px"}}>
+                      <td style={{ fontSize: "12px" }}>{item.name}</td>
+                      <td style={{ fontSize: "12px" }}>
                         <div>{getDateToInput(item.expire)}</div>
                       </td>
-                      <td style={{fontSize: "12px"}}>{item.product}</td>
-                      <td style={{fontSize: "14px", color: "red"}}>
+                      <td style={{ fontSize: "12px" }}>{item.product}</td>
+                      <td style={{ fontSize: "14px", color: "red" }}>
                         %{item.discount}
                       </td>
                       <td>
@@ -123,7 +118,7 @@ const Coupons = () => {
               </PaginateTable>
             </>
           ) : (
-            <Alert>No Coupons Added Yet !</Alert>
+            <Alert>Chưa có mã giảm giá nào được thêm!</Alert>
           )}
         </section>
       </DashboardLayout>

@@ -1,21 +1,20 @@
-import React from "react";
-import {useEffect} from "react";
+import React, { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
-import {useDispatch, useSelector} from "react-redux";
-import {Alert, Button, Input, Form, Spinner} from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Alert, Button, Input, Form, Spinner } from "reactstrap";
 import ReviewCard from "../../../../common/components/Cards/ReviewCard";
 import UseMutateReviews from "../../../../common/hooks/reviews/useMutateReviews";
-import {getProductReviews} from "../../../../features/reviews/reviewsServices";
-import {resetMutationResult} from "../../../../features/reviews/reviewsSlice";
-import {MdStar, MdStarBorder, MdStarHalf} from "react-icons/md";
+import { getProductReviews } from "../../../../features/reviews/reviewsServices";
+import { resetMutationResult } from "../../../../features/reviews/reviewsSlice";
+import { MdStar, MdStarBorder, MdStarHalf } from "react-icons/md";
 import BlockLoader from "../../../../common/components/Loaders/BlockLoader";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProductReviews = () => {
   const dispatch = useDispatch();
-  const {productReviews, isMutation} = useSelector((state) => state.reviews);
-  const {productDetails} = useSelector((state) => state.products);
-  const {isLoggedIn} = useSelector((state) => state.user);
+  const { productReviews, isMutation } = useSelector((state) => state.reviews);
+  const { productDetails } = useSelector((state) => state.products);
+  const { isLoggedIn } = useSelector((state) => state.user);
   const {
     reviewText,
     reviewRating,
@@ -35,17 +34,17 @@ const ProductReviews = () => {
     <section className="products-reviews-section">
       {!isLoggedIn ? (
         <Alert color="info">
-          Login to add your review,{" "}
-          <Link
+          Vui lòng <Link
             to={"/login"}
-            state={{path: `/products/${productDetails?.product?._id}`}}
+            state={{ path: `/products/${productDetails?.product?._id}` }}
           >
-            Login Now
-          </Link>
+            đăng nhập
+          </Link>{" "}
+          để viết đánh giá của bạn
         </Alert>
       ) : (
         <>
-          {/* REVIEWS_ITEMS */}
+          {/* DANH SÁCH ĐÁNH GIÁ */}
           {productReviews.loading ? (
             <BlockLoader minHeight={300} />
           ) : productReviews.reviews.length > 0 ? (
@@ -53,12 +52,12 @@ const ProductReviews = () => {
               <ReviewCard rev={rev} key={idx} />
             ))
           ) : (
-            <Alert color="info">No reviews added yet</Alert>
+            <Alert color="info">Chưa có đánh giá nào</Alert>
           )}
 
-          {/* REVIEWS_FORM */}
+          {/* FORM VIẾT ĐÁNH GIÁ */}
           <div className="add-review-form my-3">
-            <h3>Add Your Review</h3>
+            <h3>Viết đánh giá của bạn</h3>
             <Form className="my-3" onSubmit={handleSubmit}>
               <ReactStars
                 count={5}
@@ -75,7 +74,7 @@ const ProductReviews = () => {
                 type="textarea"
                 rows="3"
                 cols="50"
-                placeholder="Add your review"
+                placeholder="Viết cảm nhận của bạn tại đây..."
                 className="my-2"
                 value={reviewText}
                 onChange={handleReviewTextChange}
@@ -86,7 +85,7 @@ const ProductReviews = () => {
                 </Button>
               ) : (
                 <Button color="primary" type="submit">
-                  Submit
+                  Gửi đánh giá
                 </Button>
               )}
             </Form>

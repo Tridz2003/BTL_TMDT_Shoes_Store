@@ -15,11 +15,10 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const {isMutation} = useSelector((state) => state.user);
 
-  // HANDLE_SUBMIT
   const handleSubmitForm = async (values, actions) => {
     dispatch(register(values));
   };
-  // FORMIK
+
   const {handleBlur, handleChange, handleSubmit, values, errors, touched} =
     useFormik({
       initialValues: {
@@ -33,7 +32,6 @@ const RegisterForm = () => {
     });
 
   useEffect(() => {
-    // console.log(isMutation.success);
     if (isMutation.success) {
       dispatch(resetMutationResult());
       setTimeout(() => {
@@ -43,7 +41,7 @@ const RegisterForm = () => {
   }, [isMutation.success, navigate, dispatch]);
 
   return (
-    <FormContainer head={"Register"} handleSubmit={handleSubmit}>
+    <FormContainer head={"Đăng ký tài khoản"} handleSubmit={handleSubmit}>
       <FormInput
         errCondition={errors.username && touched.username}
         errMessage={errors.username}
@@ -51,7 +49,7 @@ const RegisterForm = () => {
         handleChange={handleChange}
         value={values.username}
         type="text"
-        placeholder="Username"
+        placeholder="Tên người dùng"
         name="username"
       />
       <FormInput
@@ -61,7 +59,7 @@ const RegisterForm = () => {
         handleChange={handleChange}
         value={values.email}
         type="email"
-        placeholder="Email"
+        placeholder="Địa chỉ email"
         name="email"
       />
       <FormInput
@@ -72,7 +70,7 @@ const RegisterForm = () => {
         value={values.password}
         name="password"
         type="password"
-        placeholder="Password"
+        placeholder="Mật khẩu"
       />
       <FormInput
         errCondition={errors.confirmPassword && touched.confirmPassword}
@@ -82,7 +80,7 @@ const RegisterForm = () => {
         value={values.confirmPassword}
         name="confirmPassword"
         type="password"
-        placeholder="Confirm Password"
+        placeholder="Xác nhận mật khẩu"
       />
       {isMutation?.loading ? (
         <Button color="primary" size="sm" block disabled>
@@ -90,12 +88,12 @@ const RegisterForm = () => {
         </Button>
       ) : (
         <Button color="primary" size="sm" block type="submit">
-          Register
+          Đăng ký
         </Button>
       )}
 
       <p className="text-center mt-4" style={{fontSize: "14px"}}>
-        Already Have Account? <Link to={"/login"}>Login</Link>
+        Đã có tài khoản? <Link to={"/login"}>Đăng nhập</Link>
       </p>
     </FormContainer>
   );

@@ -1,26 +1,27 @@
 import React from "react";
-import {useFormik} from "formik";
-import {Button, Spinner} from "reactstrap";
+import { useFormik } from "formik";
+import { Button, Spinner } from "reactstrap";
 import FormInput from "../../../../common/components/Shared/FormInput";
-import {LoginValidationSchema} from "../../../../common/validation/auth/loginValidation";
-import {Link} from "react-router-dom";
+import { LoginValidationSchema } from "../../../../common/validation/auth/loginValidation";
+import { Link } from "react-router-dom";
 import FormContainer from "../../../../common/components/Shared/FormContainer";
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useLocation} from "react-router-dom";
-import {login} from "../../../../features/user/userServices";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { login } from "../../../../features/user/userServices";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const {loggedStatus} = useSelector((state) => state.user);
+  const { loggedStatus } = useSelector((state) => state.user);
 
   // HANDLE_SUBMIT
   const handleSubmitForm = async (values, actions) => {
     dispatch(login(values));
   };
+
   // FORMIK
-  const {handleBlur, handleChange, handleSubmit, values, errors, touched} =
+  const { handleBlur, handleChange, handleSubmit, values, errors, touched } =
     useFormik({
       initialValues: {
         email: "",
@@ -29,6 +30,7 @@ const LoginForm = () => {
       validationSchema: LoginValidationSchema,
       onSubmit: handleSubmitForm,
     });
+
   // REDIRECTING
   let path = "/";
   if (location.state) {
@@ -47,7 +49,7 @@ const LoginForm = () => {
   }, [loggedStatus, path]);
 
   return (
-    <FormContainer head={"Login"} handleSubmit={handleSubmit}>
+    <FormContainer head={"Đăng nhập"} handleSubmit={handleSubmit}>
       <FormInput
         errCondition={errors.email && touched.email}
         errMessage={errors.email}
@@ -55,7 +57,7 @@ const LoginForm = () => {
         handleChange={handleChange}
         value={values.email}
         type="email"
-        placeholder="Email"
+        placeholder="Nhập địa chỉ email"
         name="email"
       />
       <FormInput
@@ -66,7 +68,7 @@ const LoginForm = () => {
         value={values.password}
         name="password"
         type="password"
-        placeholder="Password"
+        placeholder="Nhập mật khẩu"
       />
       {loggedStatus?.loading ? (
         <Button color="primary" size="sm" block disabled>
@@ -74,12 +76,12 @@ const LoginForm = () => {
         </Button>
       ) : (
         <Button color="primary" size="sm" block type="submit">
-          Login
+          Đăng nhập
         </Button>
       )}
 
-      <p className="text-center mt-4" style={{fontSize: "14px"}}>
-        Don't Have Account? <Link to={"/register"}>Register</Link>
+      <p className="text-center mt-4" style={{ fontSize: "14px" }}>
+        Bạn chưa có tài khoản? <Link to={"/register"}>Đăng ký</Link>
       </p>
     </FormContainer>
   );

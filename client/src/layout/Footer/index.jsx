@@ -19,17 +19,17 @@ import SocialIcon from "../../common/components/Icons/SocialIcon";
 const Footer = () => {
   return (
     <footer className="bg-light pt-4">
-      {/* FooterInfo */}
+      {/* Thông tin Footer */}
       <Container>
         <Row>
           <Col lg={6}>
             <img src={logo} alt="logo" />
             <p className="my-3">
-              We dress a generation of urban professionals, creatives and
-              innovators that need functional yet modern products for their
-              everyday lives. Our HQ is in Madrid, but we also have offices with
-              contributors in Lisbon, Berlin, Barcelona, London, Warsaw,
-              Stockholm, Amsterdam, Toronto, New York and Tokyo.
+              Chúng tôi mang đến phong cách thời trang cho thế hệ các chuyên gia
+              thành thị, người sáng tạo và đổi mới, những người cần sản phẩm hiện
+              đại, tiện dụng cho cuộc sống hàng ngày. Trụ sở chính tại London, và
+              có văn phòng cộng tác tại Lisbon, Berlin, Barcelona, London, Warsaw,
+              Stockholm, Amsterdam, Toronto, New York, Hà Nội và Tokyo.
             </p>
             <div className="d-flex align-items-center">
               {[
@@ -42,21 +42,22 @@ const Footer = () => {
               ))}
             </div>
           </Col>
+
           <Col lg={6}>
             <Row>
               <Col md={6}>
-                <h5 className="mt-3">Information</h5>
+                <h5 className="mt-3">Thông tin</h5>
                 <ul>
                   {[
-                    "About us",
-                    "FAQ",
-                    "Terms & Conditions",
-                    "Contact Us",
-                    "Help",
+                    "Về chúng tôi",
+                    "Câu hỏi thường gặp",
+                    "Điều khoản & Điều kiện",
+                    "Liên hệ",
+                    "Hỗ trợ",
                   ].map((item) => (
                     <li key={item} className="mb-2 d-flex align-items-center">
                       <MdKeyboardArrowRight />
-                      <NavLink to="/" className={"nav-link"}>
+                      <NavLink to="/" className="nav-link">
                         {item}
                       </NavLink>
                     </li>
@@ -64,12 +65,12 @@ const Footer = () => {
                 </ul>
               </Col>
               <Col md={6}>
-                <h5 className="mt-3">Contact</h5>
+                <h5 className="mt-3">Liên hệ</h5>
                 <ul>
                   {[
-                    {Icon: AiFillHome, text: "New York, NY 10012, US"},
-                    {Icon: FaEnvelope, text: "info@example.com"},
-                    {Icon: FaPhoneAlt, text: "+ 01 234 567 88"},
+                    {Icon: AiFillHome, text: "92 Trần Phú, Hà Đông, Hà Nội, Việt Nam"},
+                    {Icon: FaEnvelope, text: "hshop@gmail.com"},
+                    {Icon: FaPhoneAlt, text: "+ 84 098 765 43"},
                   ].map(({Icon, text}) => (
                     <li className="mb-3" key={text}>
                       <Icon size={20} className="me-2" /> {text}
@@ -90,17 +91,9 @@ const Footer = () => {
         </Row>
       </Container>
 
-      {/* MadeText */}
+      {/* Phần bản quyền */}
       <div className="text-center p-3 bg-light mt-3">
-        Made with <AiTwotoneHeart color="red" />{" "}
-        <a
-          className="text-decoration-none fw-bolder"
-          href="https:github.com/omar1Mayallo"
-          target={"_blank"}
-          rel="noreferrer"
-        >
-          OTM
-        </a>
+        Copyright by HTEAM
       </div>
     </footer>
   );

@@ -7,7 +7,7 @@ import HomeCategoriesSection from "./sections/HomeCategoriesSection";
 const Home = () => {
   return (
     <>
-      <PageHelmet title={"Home"} />
+      <PageHelmet title={"Trang chủ"} /> {/* Tiêu đề hiển thị trên tab trình duyệt */}
       <HomeBannersSection />
       <HomeCategoriesSection />
       <HomeCarouselSection />

@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {MdDelete} from "react-icons/md";
-import {Alert, Badge} from "reactstrap";
+import React, { useState } from "react";
+import { MdDelete } from "react-icons/md";
+import { Alert, Badge } from "reactstrap";
 import DashboardHead from "../../../common/components/Heads/DashboardHead";
 import OverlayLoader from "../../../common/components/Loaders/OverlayLoader";
 import PageHelmet from "../../../common/components/Shared/PageHelmet";
@@ -10,63 +10,54 @@ import useMutateUsers from "../../../common/hooks/user/useMutateUsers";
 import DashboardLayout from "../../../layout/DashboardLayout";
 
 const Users = () => {
-  /*____ALL_USERS____*/
-  //_PAGINATION
   const [page, setPage] = useState(1);
   const handlePagination = (pg) => {
     setPage(pg);
   };
-  const {allUsers, isMutationAdmin} = useGetUsers(5, page);
+  const { allUsers, isMutationAdmin } = useGetUsers(5, page);
 
-  /*____MUTATION_HANDLERS___*/
-  const {handleDeleteUser, handleUpdateUserRole} = useMutateUsers();
+  const { handleDeleteUser, handleUpdateUserRole } = useMutateUsers();
 
   return (
     <>
-      <PageHelmet title={"Users"} />
+      <PageHelmet title={"Người dùng"} />
       <DashboardLayout>
         <section className="Users-section">
-          {/*____LOADING_OVERLAY____*/}
           <OverlayLoader active={isMutationAdmin?.loading} />
 
-          {/*____HEAD____*/}
-          <DashboardHead head={"Users"} loading={allUsers.loading} />
+          <DashboardHead head={"Danh sách người dùng"} loading={allUsers.loading} />
 
           {allUsers.loading || allUsers.users.length > 0 ? (
             <>
-              {/*____USERS_TABLE____*/}
               <PaginateTable
                 allItems={allUsers}
                 handlePagination={handlePagination}
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>Họ tên</th>
                     <th>Email</th>
-                    <th>Role</th>
-                    <th>Register Date</th>
-                    <th>Update Role</th>
-                    <th>Delete</th>
+                    <th>Vai trò</th>
+                    <th>Ngày đăng ký</th>
+                    <th>Cập nhật vai trò</th>
+                    <th>Xóa</th>
                   </tr>
                 </thead>
                 <tbody>
                   {allUsers.users.map((item) => (
                     <tr key={item._id}>
-                      <td
-                        className="text-capitalize"
-                        style={{fontSize: "13px"}}
-                      >
+                      <td className="text-capitalize" style={{ fontSize: "13px" }}>
                         {item.username}
                       </td>
-                      <td style={{fontSize: "13px"}}>{item.email}</td>
+                      <td style={{ fontSize: "13px" }}>{item.email}</td>
                       <td>
                         {item.role === "user" ? (
                           <Badge color="info" className="rounded">
-                            {item.role.toUpperCase()}
+                            NGƯỜI DÙNG
                           </Badge>
                         ) : (
                           <Badge color="danger" className="rounded">
-                            {item.role.toUpperCase()}
+                            QUẢN TRỊ VIÊN
                           </Badge>
                         )}
                       </td>
@@ -80,8 +71,8 @@ const Users = () => {
                             handleUpdateUserRole(item._id, e.target.value)
                           }
                         >
-                          <option value="user">user</option>
-                          <option value="admin">admin</option>
+                          <option value="user">Người dùng</option>
+                          <option value="admin">Quản trị viên</option>
                         </select>
                       </td>
                       <td>
@@ -97,7 +88,7 @@ const Users = () => {
               </PaginateTable>
             </>
           ) : (
-            <Alert>No User Registered Yet</Alert>
+            <Alert>Chưa có người dùng nào được đăng ký</Alert>
           )}
         </section>
       </DashboardLayout>

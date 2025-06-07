@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import {MdDelete, MdEdit} from "react-icons/md";
-import {Link} from "react-router-dom";
-import {Alert} from "reactstrap";
+import React, { useState } from "react";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { Alert } from "reactstrap";
 import DashboardHead from "../../../common/components/Heads/DashboardHead";
 import OverlayLoader from "../../../common/components/Loaders/OverlayLoader";
 import PageHelmet from "../../../common/components/Shared/PageHelmet";
@@ -9,26 +9,25 @@ import PaginateTable from "../../../common/components/Shared/PaginateTable";
 import useGetCategories from "../../../common/hooks/categories/useGetCategories";
 import useMutateCategories from "../../../common/hooks/categories/useMutateCategories";
 import DashboardLayout from "../../../layout/DashboardLayout";
-import {CreateCategoryModal, UpdateCategoryModal} from "./MutateModals";
+import { CreateCategoryModal, UpdateCategoryModal } from "./MutateModals";
 
 const Categories = () => {
-  /*____ALL_CATEGORIES____*/
-  //_PAGINATION
+  // PHÂN TRANG
   const [page, setPage] = useState(1);
   const handlePagination = (pg) => {
     setPage(pg);
   };
-  const {allCategories, isMutation} = useGetCategories(5, page);
+  const { allCategories, isMutation } = useGetCategories(5, page);
 
-  /*____UPDATE_MODAL____*/
+  // CẬP NHẬT
   const [updateModal, setUpdateModal] = useState(false);
   const toggleUpdateModal = () => setUpdateModal(!updateModal);
 
-  /*____CREATE_MODAL____*/
+  // TẠO MỚI
   const [createModal, setCreateModal] = useState(false);
   const toggleCreateModal = () => setCreateModal(!createModal);
 
-  /*____MUTATION_HANDLERS___*/
+  // XỬ LÝ DỮ LIỆU
   const {
     category,
     setCategory,
@@ -45,24 +44,24 @@ const Categories = () => {
 
   return (
     <>
-      <PageHelmet title={"Categories"} />
+      <PageHelmet title={"Danh mục"} />
       <DashboardLayout>
         <section className="Categories-section">
-          {/*____LOADING_OVERLAY____*/}
+          {/* LOADER */}
           <OverlayLoader active={isMutation?.loading} />
 
-          {/*____HEAD____*/}
+          {/* TIÊU ĐỀ */}
           <DashboardHead
-            head={"Categories"}
+            head={"Danh mục sản phẩm"}
             toggleCreateModal={toggleCreateModal}
             loading={allCategories.loading}
           />
 
-          {/*____CREATE_MODAL____*/}
+          {/* MODAL TẠO MỚI */}
           <CreateCategoryModal
             modalState={createModal}
             toggle={toggleCreateModal}
-            ModalHead={"Create Category"}
+            ModalHead={"Thêm danh mục"}
             name={name}
             setName={setName}
             description={description}
@@ -73,17 +72,18 @@ const Categories = () => {
 
           {allCategories.loading || allCategories.categories?.length > 0 ? (
             <>
-              {/*____UPDATE_MODAL____*/}
+              {/* MODAL CẬP NHẬT */}
               <UpdateCategoryModal
                 modalState={updateModal}
                 toggle={toggleUpdateModal}
-                ModalHead={"Update Category"}
+                ModalHead={"Cập nhật danh mục"}
                 category={category}
                 setCategory={setCategory}
                 setImage={setImage}
                 handleUpdateCategory={handleUpdateCategory}
               />
-              {/*____CATEGORIES_TABLE____*/}
+
+              {/* BẢNG DANH MỤC */}
               <PaginateTable
                 allItems={allCategories}
                 handlePagination={handlePagination}
@@ -91,28 +91,28 @@ const Categories = () => {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Img</th>
-                    <th>Update</th>
-                    <th>Delete</th>
+                    <th>Tên danh mục</th>
+                    <th>Hình ảnh</th>
+                    <th>Cập nhật</th>
+                    <th>Xóa</th>
                   </tr>
                 </thead>
                 <tbody>
                   {allCategories.categories.map((item) => (
                     <tr key={item._id}>
-                      <td style={{fontSize: "11px"}}>
+                      <td style={{ fontSize: "11px" }}>
                         <Link to={`/categories/${item._id}`}>{item._id}</Link>
                       </td>
-                      <td style={{fontSize: "13px", fontStyle: "italic"}}>
+                      <td style={{ fontSize: "13px", fontStyle: "italic" }}>
                         {item.name.toUpperCase()}
                       </td>
                       <td>
                         <img
                           src={item.image}
-                          alt="category-img"
+                          alt="Hình danh mục"
                           width={30}
                           height={50}
-                          style={{objectFit: "contain"}}
+                          style={{ objectFit: "contain" }}
                         />
                       </td>
                       <td>
@@ -137,7 +137,7 @@ const Categories = () => {
               </PaginateTable>
             </>
           ) : (
-            <Alert>No Categories Added Yet !</Alert>
+            <Alert>Chưa có danh mục nào được thêm!</Alert>
           )}
         </section>
       </DashboardLayout>

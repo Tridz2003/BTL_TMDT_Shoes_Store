@@ -8,6 +8,7 @@ import {
   Input,
 } from "reactstrap";
 
+// Modal Tạo Danh Mục
 export const CreateCategoryModal = ({
   modalState,
   toggle,
@@ -26,14 +27,14 @@ export const CreateCategoryModal = ({
         <Input
           name="name"
           type="text"
-          placeholder="Name"
+          placeholder="Tên danh mục"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <Input
           className="my-3"
           name="description"
-          placeholder="Description"
+          placeholder="Mô tả"
           type="textarea"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -53,16 +54,17 @@ export const CreateCategoryModal = ({
             toggle();
           }}
         >
-          Create
+          Tạo mới
         </Button>
         <Button color="primary" onClick={toggle}>
-          Cancel
+          Hủy
         </Button>
       </ModalFooter>
     </Modal>
   );
 };
 
+// Modal Cập Nhật Danh Mục
 export const UpdateCategoryModal = ({
   modalState,
   toggle,
@@ -79,16 +81,18 @@ export const UpdateCategoryModal = ({
         <Input
           name="name"
           type="text"
+          placeholder="Tên danh mục"
           value={category?.name}
-          onChange={(e) => setCategory({...category, name: e.target.value})}
+          onChange={(e) => setCategory({ ...category, name: e.target.value })}
         />
         <Input
           className="my-3"
           name="description"
           type="textarea"
+          placeholder="Mô tả"
           value={category?.description}
           onChange={(e) =>
-            setCategory({...category, description: e.target.value})
+            setCategory({ ...category, description: e.target.value })
           }
         />
         <Input
@@ -106,10 +110,10 @@ export const UpdateCategoryModal = ({
             toggle();
           }}
         >
-          Edit
+          Cập nhật
         </Button>
         <Button color="primary" onClick={toggle}>
-          Cancel
+          Hủy
         </Button>
       </ModalFooter>
     </Modal>

@@ -4,7 +4,7 @@ import {Input} from "reactstrap";
 const ShopSortBar = ({results = 0, handleSort}) => {
   return (
     <section className="sort-bar-section my-3 d-flex align-items-center justify-content-between">
-      <span>Results: {results}</span>
+      <span>Kết quả: {results}</span>
 
       <div>
         <Input
@@ -16,12 +16,12 @@ const ShopSortBar = ({results = 0, handleSort}) => {
             handleSort(e.target.value);
           }}
         >
-          <option value="">Default Sort</option>
-          <option value="-price">Price high to low</option>
-          <option value="+price">Price low to high</option>
-          <option value="+ratingAverage">Rating Low to high</option>
-          <option value="-ratingAverage">Rating high to low</option>
-          <option value="name">Alphabetical</option>
+          <option value="">Sắp xếp mặc định</option>
+          <option value="-price">Giá từ cao đến thấp</option>
+          <option value="+price">Giá từ thấp đến cao</option>
+          <option value="+ratingAverage">Đánh giá từ thấp đến cao</option>
+          <option value="-ratingAverage">Đánh giá từ cao đến thấp</option>
+          <option value="name">Theo thứ tự chữ cái</option>
         </Input>
       </div>
     </section>

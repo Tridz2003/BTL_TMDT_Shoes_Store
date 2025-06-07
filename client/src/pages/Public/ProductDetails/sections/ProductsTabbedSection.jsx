@@ -1,25 +1,26 @@
-import React, {useState} from "react";
-import {Nav, NavLink, TabContent, TabPane} from "reactstrap";
+import React, { useState } from "react";
+import { Nav, NavLink, TabContent, TabPane } from "reactstrap";
 import ProductReviews from "./ProductReviews";
 
-const ProductsTabbedSection = ({description}) => {
+const ProductsTabbedSection = ({ description }) => {
   const [activeTab, setActiveTab] = useState("1");
+
   return (
     <section className="product-desc-revs-section my-4">
       <Nav tabs>
         <NavLink
           className={activeTab === "1" ? "active" : ""}
           onClick={() => setActiveTab("1")}
-          style={{cursor: "pointer", fontWeight: 600}}
+          style={{ cursor: "pointer", fontWeight: 600 }}
         >
-          Description
+          Mô tả sản phẩm
         </NavLink>
         <NavLink
           className={activeTab === "2" ? "active" : ""}
           onClick={() => setActiveTab("2")}
-          style={{cursor: "pointer", fontWeight: 600}}
+          style={{ cursor: "pointer", fontWeight: 600 }}
         >
-          Reviews
+          Đánh giá
         </NavLink>
       </Nav>
       <TabContent activeTab={activeTab}>

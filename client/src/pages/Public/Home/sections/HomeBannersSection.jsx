@@ -4,6 +4,7 @@ import BannersCarousel from "../../../../common/components/Carousel/BannersCarou
 const HomeBannersSection = () => {
   return (
     <section className="banners-section">
+      <h2 className="text-center mb-4">Khuyến mãi nổi bật</h2>
       <BannersCarousel />
     </section>
   );
