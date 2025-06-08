@@ -13,9 +13,9 @@ const ProductDetails = () => {
       <Container className="my-4">
         <PageBreadcrumbs
           pages={[
-            {page: "Home", link: "/"},
-            {page: "Shop", link: "/shop"},
-            {page: `Products(${productId})`, isActive: true},
+            {page: "Trang chủ", link: "/"},
+            {page: "Cửa hàng", link: "/shop"},
+            {page: `Sản phẩm(${productId})`, isActive: true},
           ]}
         />
         <ProductInfoSection />
