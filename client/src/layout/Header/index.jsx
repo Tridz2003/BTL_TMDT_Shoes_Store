@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Container,
   DropdownItem,
@@ -6,45 +6,46 @@ import {
   DropdownToggle,
   UncontrolledDropdown,
 } from "reactstrap";
-import {LinkContainer} from "react-router-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import logo from "../../assets/imgs/dark-logo.png";
-import {Nav, NavLinks, IconLinks} from "./styles";
-import {BsPersonFill} from "react-icons/bs";
-import {TfiMenu} from "react-icons/tfi";
-import {MdOutlineClose} from "react-icons/md";
+import { Nav, NavLinks, IconLinks } from "./styles";
+import { BsPersonFill } from "react-icons/bs";
+import { TfiMenu } from "react-icons/tfi";
+import { MdOutlineClose } from "react-icons/md";
 import BadgedCartIcon from "../../common/components/Icons/BadgedCartIcon";
-import {NavLink, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../features/user/userSlice";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../features/user/userSlice";
 import useUserCart from "../../common/hooks/cart/useUserCart";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  const {userProfile} = useSelector((state) => state.user);
+  const { userProfile } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {userCart} = useUserCart();
+  const { userCart } = useUserCart();
 
   return (
     <header className="bg-light">
       <Container>
         <div className="navbar py-2">
           {/* Logo */}
-          <LinkContainer style={{cursor: "pointer"}} to={"/"}>
+          <LinkContainer style={{ cursor: "pointer" }} to={"/"}>
             <img src={logo} alt="Logo" width={50} height={50} />
           </LinkContainer>
 
           {/* Navbar */}
           <Nav>
             <NavLinks isOpen={isOpen}>
-              {["home", "shop", "categories"].map((el, idx) => (
+              {[
+                { label: "Trang chủ", to: "/" },
+                { label: "Cửa hàng", to: "/shop" },
+                { label: "Danh mục", to: "/categories" },
+              ].map((el, idx) => (
                 <NavItem key={idx} toggle={toggle}>
-                  <NavLink
-                    className={"nav-link"}
-                    to={el === "home" ? "/" : `/${el}`}
-                  >
-                    {el}
+                  <NavLink className={"nav-link"} to={el.to}>
+                    {el.label} {/* Giữ nguyên đường dẫn */}
                   </NavLink>
                 </NavItem>
               ))}
@@ -77,7 +78,7 @@ const Header = () => {
                       </DropdownToggle>
                       <DropdownMenu>
                         <DropdownItem onClick={() => navigate("/profile")}>
-                          Profile
+                          Hồ sơ
                         </DropdownItem>
                         {userProfile.user?.role === "admin" && (
                           <>
@@ -85,13 +86,13 @@ const Header = () => {
                             <DropdownItem
                               onClick={() => navigate("/admin/products")}
                             >
-                              Dashboard
+                              Quản trị
                             </DropdownItem>
                           </>
                         )}
                         <DropdownItem divider />
                         <DropdownItem onClick={() => dispatch(logout())}>
-                          Logout
+                          Đăng xuất
                         </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>
@@ -99,14 +100,13 @@ const Header = () => {
                 ) : (
                   <li>
                     <NavLink className={"nav-link"} to={"/login"}>
-                      <BsPersonFill />
+                      <BsPersonFill title="Đăng nhập" />
                     </NavLink>
                   </li>
                 ))}
-
               <li
                 className="d-block d-md-none bg-light p-2 rounded-circle"
-                style={{cursor: "pointer"}}
+                style={{ cursor: "pointer" }}
                 onClick={toggle}
               >
                 <TfiMenu />
@@ -121,6 +121,6 @@ const Header = () => {
 
 export default Header;
 
-function NavItem({toggle, children}) {
+function NavItem({ toggle, children }) {
   return <li onClick={toggle}>{children}</li>;
 }

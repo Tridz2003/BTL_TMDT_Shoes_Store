@@ -18,18 +18,18 @@ const SideBarLayout = ({children}) => {
           <Sidebar>
             <SidebarLink
               Icon={CgProfile}
-              name={"Profile"}
+              name={"Hồ_Sơ"}
               linkUrl={"/profile"}
             />
-            <SidebarLink Icon={FaBoxes} name={"Orders"} linkUrl={"/orders"} />
+            <SidebarLink Icon={FaBoxes} name={"Đơn_hàng"} linkUrl={"/orders"} />
             <SidebarLink
               Icon={AiFillHeart}
-              name={"Wishlist"}
+              name={"Yêu_Thích"}
               linkUrl={"/wishlist"}
             />
             <SidebarLink
               Icon={FiLogOut}
-              name={"Logout"}
+              name={"Đăng_xuất"}
               handleClick={() => dispatch(logout())}
             />
           </Sidebar>
