@@ -12,8 +12,8 @@ const Categories = () => {
       <Container className="my-4">
         <PageBreadcrumbs
           pages={[
-            {page: "Home", link: "/"},
-            {page: "Categories", isActive: true},
+            {page: "Cửa hàng", link: "/"},
+            {page: "Danh mục", isActive: true},
           ]}
         />
         <CategoriesSection withSlice={false} />

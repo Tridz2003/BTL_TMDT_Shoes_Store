@@ -26,8 +26,8 @@ const Shop = () => {
       <Container className="py-5">
         <PageBreadcrumbs
           pages={[
-            {page: "Home", link: "/"},
-            {page: "Shop", isActive: true},
+            {page: "Trang chủ", link: "/"},
+            {page: "Cửa hàng", isActive: true},
           ]}
         />
         <OverlayLoader active={allProducts?.loading} />

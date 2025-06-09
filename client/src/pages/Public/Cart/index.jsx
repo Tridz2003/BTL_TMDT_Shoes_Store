@@ -11,8 +11,8 @@ const Cart = () => {
       <Container className="py-4">
         <PageBreadcrumbs
           pages={[
-            {page: "Home", link: "/"},
-            {page: "Cart", isActive: true},
+            {page: "Trang chủ", link: "/"},
+            {page: "Giỏ hàng", isActive: true},
           ]}
         />
         <CartItemsSection />
